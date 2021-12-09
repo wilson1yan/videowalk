@@ -219,6 +219,7 @@ from torch import nn
 from torch.nn import functional as F
 from torchvision import transforms
 import resnet
+import cnn
 
 def partial_load(pretrained_dict, model, skip_keys=[]):
     model_dict = model.state_dict()
@@ -286,7 +287,9 @@ class From3D(nn.Module):
 
 def make_encoder(args):
     model_type = args.model_type
-    if model_type == 'scratch':
+    if model_type == 'scratch_small':
+        net = cnn.small_resnet()
+    elif model_type == 'scratch':
         net = resnet.resnet18()
         net.modify(padding='reflect')
 

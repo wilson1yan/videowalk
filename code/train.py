@@ -13,6 +13,7 @@ import torchvision
 import data
 from data.kinetics import Kinetics400
 from data.video import VideoList
+from data.h5py import H5PyData
 from torchvision.datasets.samplers.clip_sampler import RandomClipSampler, UniformClipSampler
 
 import utils
@@ -96,6 +97,13 @@ def main(args):
                 frame_rate=args.frame_skip,
                 # cached=cached,
                 _precomputed_metadata=cached
+            )
+        elif 'hdf5' in args.data_path:
+            return H5PyData(
+                data_path=args.data_path,
+                clip_len=args.clip_len,
+                is_train=is_train,
+                transform=_transform
             )
         elif os.path.isdir(args.data_path): # HACK assume image dataset if data path is a directory
             return torchvision.datasets.ImageFolder(

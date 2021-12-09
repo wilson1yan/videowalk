@@ -42,7 +42,7 @@ def test_args():
     parser.add_argument('--visdom-server', default='localhost', type=str)
 
     # Model Details
-    parser.add_argument('--model-type', default='scratch', type=str)
+    parser.add_argument('--model-type', default='scratch_small', type=str)
     parser.add_argument('--head-depth', default=-1, type=int,
                         help='depth of mlp applied after encoder (0 = linear)')
 
@@ -81,11 +81,11 @@ def train_args():
     parser.add_argument('--data-path', default='/data/ajabri/kinetics/',
         help='/home/ajabri/data/places365_standard/train/ | /data/ajabri/kinetics/')
     parser.add_argument('--device', default='cuda', help='device')
-    parser.add_argument('--clip-len', default=8, type=int, metavar='N',
+    parser.add_argument('--clip-len', default=4, type=int, metavar='N',
                         help='number of frames per clip')
     parser.add_argument('--clips-per-video', default=5, type=int, metavar='N',
                         help='maximum number of clips per video to consider')
-    parser.add_argument('-b', '--batch-size', default=8, type=int)
+    parser.add_argument('-b', '--batch-size', default=20, type=int)
     parser.add_argument('--epochs', default=25, type=int, metavar='N',
                         help='number of total epochs to run')
     parser.add_argument('--steps-per-epoch', default=1e10, type=int, help='max number of batches per epoch')
@@ -113,18 +113,18 @@ def train_args():
     parser.add_argument( "--fast-test", dest="fast_test", help="", action="store_true", )
 
     parser.add_argument('--name', default='', type=str, help='')
-    parser.add_argument('--dropout', default=0, type=float, help='dropout rate on A')
+    parser.add_argument('--dropout', default=0.1, type=float, help='dropout rate on A')
     parser.add_argument('--zero-diagonal', help='always zero diagonal of A', action="store_true", )
     parser.add_argument('--flip', default=False, help='flip transitions (bug)', action="store_true", )
 
-    parser.add_argument('--frame-aug', default='', type=str,
+    parser.add_argument('--frame-aug', default='grid', type=str,
         help='grid or none')
     parser.add_argument('--frame-transforms', default='crop', type=str,
         help='combine, ex: crop, cj, flip')
 
     parser.add_argument('--frame-skip', default=8, type=int, help='kinetics: fps | others: skip between frames')
-    parser.add_argument('--img-size', default=256, type=int)
-    parser.add_argument('--patch-size', default=[64, 64, 3], type=int, nargs="+")
+    parser.add_argument('--img-size', default=128, type=int)
+    parser.add_argument('--patch-size', default=[32, 32, 3], type=int, nargs="+")
 
     parser.add_argument('--port', default=8095, type=int, help='visdom port')
     parser.add_argument('--server', default='localhost', type=str, help='visdom server')
