@@ -25,7 +25,7 @@ class H5PyData(data.Dataset):
         self.sequence_length = clip_len
         self.data = h5py.File(self.data_path, 'r')
         self._images = self.data[f'{self.split}_data']
-        self._idxs = self.data[f'{self.split}_idx']
+        self._idx = self.data[f'{self.split}_idx']
 
         ep_ends = np.concatenate((self._idx[1:], [len(self._images)]))
         self.ep_lens = ep_ends - self._idx

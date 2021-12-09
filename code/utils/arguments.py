@@ -129,7 +129,7 @@ def train_args():
     parser.add_argument('--port', default=8095, type=int, help='visdom port')
     parser.add_argument('--server', default='localhost', type=str, help='visdom server')
 
-    parser.add_argument('--model-type', default='scratch', type=str, help='scratch | imagenet | moco')
+    parser.add_argument('--model-type', default='scratch_small', type=str, help='scratch | imagenet | moco')
     parser.add_argument('--optim', default='adam', type=str, help='adam | sgd')
 
     parser.add_argument('--temp', default=0.07,
