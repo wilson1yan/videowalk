@@ -63,6 +63,7 @@ def test(loader, model, args):
     D = None    # Radius mask
     
     for vid_idx, (imgs, imgs_orig, lbls, lbls_orig, lbl_map, meta) in enumerate(loader):
+        import ipdb; ipdb.set_trace()
         t_vid = time.time()
         imgs = imgs.to(args.device)
         B, N = imgs.shape[:2]
