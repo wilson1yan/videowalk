@@ -32,11 +32,11 @@ class CATER(data.Dataset):
         self.sequence_length = args.sequence_length
         self.hparams = args
 
-        videos = glob.glob(osp.join(args.data_path, 'videos', '*.avi'))
+        videos = glob.glob(osp.join(args.filelist, 'videos', '*.avi'))
         videos.sort()
         threshold = int(len(videos) * 0.95)
         self.video_paths = videos[:threshold] if train else videos[threshold:]
-        self.scene_paths = [osp.join(args.data_path, 'scenes',
+        self.scene_paths = [osp.join(args.filelist, 'scenes',
                                      osp.basename(path).replace('.avi', '.json'))
                             for path in self.video_paths]
     

@@ -11,7 +11,7 @@ import torch.backends.cudnn as cudnn
 
 from model import CRW
 
-from data import vos, jhmdb
+from data import vos, jhmdb, cater
 from data.video import SingleVideoDataset
 
 import utils
@@ -23,7 +23,10 @@ def main(args, vis):
     args.mapScale = test_utils.infer_downscale(model)
 
     args.use_lab = args.model_type == 'uvc'
-    dataset = (vos.VOSDataset if not 'jhmdb' in args.filelist  else jhmdb.JhmdbSet)(args)
+    if 'cater' in args.filelist:
+        dataset = cater.CATER(args)
+    else:
+        dataset = (vos.VOSDataset if not 'jhmdb' in args.filelist  else jhmdb.JhmdbSet)(args)
     val_loader = torch.utils.data.DataLoader(dataset,
         batch_size=int(args.batchSize), shuffle=False, num_workers=args.workers, pin_memory=True)
 
