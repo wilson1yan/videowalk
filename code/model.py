@@ -33,7 +33,7 @@ class CRW(nn.Module):
         self.vis = vis
 
     def infer_dims(self):
-        in_sz = self.args.img_size
+        in_sz = 256 # self.args.img_size
         dummy = torch.zeros(1, 3, 1, in_sz, in_sz).to(next(self.encoder.parameters()).device)
         dummy_out = self.encoder(dummy)
         self.enc_hid_dim = dummy_out.shape[1]
